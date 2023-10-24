@@ -1,0 +1,10 @@
+Classes:
+    User
+        Name
+        Email
+        Password
+    Bracelets (created!)
+        Name
+        Description
+        Era
+        Uploaded Picture
