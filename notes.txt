@@ -8,3 +8,5 @@ Classes:
         Description
         Era
         Uploaded Picture
+
+    Thinking of using this an example for navbar, test it out: https://htmljstemplates.com/html/bootstrap-5-navbars
