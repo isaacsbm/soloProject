@@ -4,6 +4,7 @@ import Header from './components/Header'
 import './App.css'
 import Dashboard from './components/Dashboard';
 import axios from 'axios'
+import CreateBracelet from './components/CreateBracelet';
 
 function App() {
   const [allBracelets, setAllBracelets] = 
@@ -19,6 +20,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path='/dashboard' element={<Dashboard></Dashboard>} />
+        <Route path='/createbracelet' element={<CreateBracelet></CreateBracelet>} />
       </Routes>
     </>
     </BrowserRouter>
