@@ -5,6 +5,7 @@ import './App.css'
 import Dashboard from './components/Dashboard';
 import axios from 'axios'
 import CreateBracelet from './components/CreateBracelet';
+import DeleteBracelet from './components/DeleteBracelet';
 
 function App() {
   const [allBracelets, setAllBracelets] = 
@@ -19,12 +20,13 @@ function App() {
     <>
       <Header></Header>
       <Routes>
-        <Route path='/dashboard' element={<Dashboard></Dashboard>} />
-        <Route path='/createbracelet' element={<CreateBracelet></CreateBracelet>} />
+        <Route path='/dashboard' element={<Dashboard allBracelets={allBracelets}></Dashboard>} />
+        <Route path='/createbracelet' element={<CreateBracelet setAllBracelets={setAllBracelets} allBracelets={allBracelets} />} />
+        <Route path='/bracelets/delete/:id' element={<DeleteBracelet setAllBracelets={setAllBracelets} allBracelets={allBracelets} />} />
       </Routes>
     </>
     </BrowserRouter>
   )
 }
 
-export default App
+export default App;

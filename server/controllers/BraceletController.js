@@ -1,4 +1,5 @@
 const Bracelet = require('../models/Bracelet');
+const fs = require('fs');
 
 module.exports = {
     findAllBracelets: (req, res) => {
@@ -16,11 +17,25 @@ module.exports = {
             .catch(err => res.status(400).json(err))
     },
     createBracelet: (req, res) => {
-        Bracelet.create(req.body)
+        if(!req.file){
+            // console.log("unsucessful file upload")
+            return res.status(400).json({msg: 'No image uploaded'})
+        }
+        // if(error) {
+        //     return res.status(400).json(error)  
+        //   }
+        Bracelet.create({
+            name: req.body.name, 
+            description: req.body.description,
+            era: req.body.era,
+            image: req.file.path
+        })
             .then(newBracelet => {
-                console.log("Bracelet created!")
+                console.log("Bracelet created and file uploaded!")
                 res.json(newBracelet)})
-            .catch(err => res.status(400).json(err))
+            .catch(err =>{
+                res.status(400).json(err)
+            })
     },
     updateBracelet: (req, res) => {
         Bracelet.findByIdAndUpdate({_id: req.params.id})
@@ -36,5 +51,14 @@ module.exports = {
                 res.json(deletedBracelet)
             })
             .catch(err => res.status(400).json(err))
+        
+            Bracelet.findById(req.params.id)
+                .then(deletedBracelet => {
+                    fs.unlinkSync(deletedBracelet.image)
+                    return bracelet.remove()
+                })
+                .then(() => {
+                    res.json({deleted:true})
+                })
     }
 };

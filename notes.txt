@@ -10,3 +10,8 @@ Classes:
         Uploaded Picture
 
     Thinking of using this an example for navbar, test it out: https://htmljstemplates.com/html/bootstrap-5-navbars
+
+
+    TO DO: 
+
+    Add file error handling for multer - https://www.npmjs.com/package/multer?activeTab=readme 
