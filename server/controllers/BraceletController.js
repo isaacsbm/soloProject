@@ -45,20 +45,22 @@ module.exports = {
             .catch(err => res.status(400).json(err))
     },
     deleteBracelet: (req, res) => {
-        Bracelet.findByIdAndDelete({_id: req.params.id})
-            .then(deletedBracelet =>{
-                console.log("Bracelet was deleted")
-                res.json(deletedBracelet)
-            })
-            .catch(err => res.status(400).json(err))
+        // Bracelet.findByIdAndDelete({_id: req.params.id})
+        //     .then(deletedBracelet =>{
+        //         console.log("Bracelet was deleted")
+        //         res.json(deletedBracelet)
+        //     })
+        //     .catch(err => res.status(400).json(err))
         
-            Bracelet.findById(req.params.id)
-                .then(deletedBracelet => {
-                    fs.unlinkSync(deletedBracelet.image)
+            Bracelet.findById (req.params.id)
+                .then(bracelet => {
+                    // console.log(bracelet.image)
+                    fs.unlinkSync(bracelet.image)
                     return bracelet.remove()
                 })
                 .then(() => {
                     res.json({deleted:true})
                 })
+        
     }
 };

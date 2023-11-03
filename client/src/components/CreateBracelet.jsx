@@ -70,7 +70,7 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
             .then(
                     res => {
                         setAllBracelets([...allBracelets, res.data])
-                        // navigate("/dashboard");
+                        navigate("/dashboard");
                     }
                 )
             .catch(err => console.log(err))
