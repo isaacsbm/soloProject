@@ -8,13 +8,6 @@ module.exports = app => {
     app.post('/api/bracelets/', 
         upload.single('file'), BraceletController.createBracelet
         );
-    app.delete('/api/bracelets/delete/:id', BraceletController.deleteBracelet);
+    app.delete('/api/bracelets/:id', BraceletController.deleteBracelet);
     app.patch('/api/bracelets/:id', BraceletController.updateBracelet);
-    // app.post('/api/testupload', upload.single('file'),(req, res, err) => {
-    //     console.log(req.file)
-    //     if (err) {
-    //         // console.log(err)
-    //         return res.status(500).json(err)
-    //     }
-    // })
 }

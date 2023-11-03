@@ -5,8 +5,8 @@ const DeleteBracelet = ({allBracelets, setAllBracelets}) => {
     const navigate = useNavigate()
     const {id} = useParams();
     useEffect(() => {
-        const destroyBracelet = allBracelets.filter(bracelet => bracelet._id !== id )
-        setAllBracelets(destroyBracelet)
+        const updatedBracelets = allBracelets.filter(bracelet => bracelet._id !== id )
+        setAllBracelets(updatedBracelets)
         navigate("/dashboard")
     }, [id, navigate])
     return (
