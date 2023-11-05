@@ -29,5 +29,4 @@ const BraceletGallery = ({allBracelets}) => {
         </div>
     )
 }
-
 export default BraceletGallery;
