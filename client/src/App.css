@@ -179,3 +179,7 @@ html, body {
     justify-content: center;
     align-items: center;
 }
+
+.invalid-feedbacks{
+  color: #ff606e;
+}

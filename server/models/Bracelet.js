@@ -21,7 +21,7 @@ const BraceletSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        // required: [true, "Picture is required!"]
+        required: [true, "Picture is required!"]
     }
 }, {timestamps: true});
 

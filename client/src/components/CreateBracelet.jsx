@@ -4,13 +4,18 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const CreateBracelet = ({allBracelets, setAllBracelets}) => {
-    const [preview, setPreview] = useState();
     const [braceletName, setBraceletName] = useState("");
     const [description, setDescription] = useState("");
     const [era, setEra] = useState("Red");
     const [formData, setFormData] = useState()
     const navigate = useNavigate();
     const [file, setFile] = useState()
+    const [preview, setPreview] = useState();
+
+    const [nameError, setNameError] = useState('');
+    const [descriptionError, setDescriptionError] = useState('');
+    const [eraError, setEraError] = useState('')
+    const [fileError, setFileError] = useState('')
     const handleImageChange = (event) => {
         const selectedFile = event.target.files[0];
         if (selectedFile) {
@@ -23,25 +28,55 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
 
     const testHandler = (event) => {
         event.preventDefault()
-        const formData = new FormData()
-        //file append
-        formData.append('file', file)
 
-        //Form Input - create form bracelet inputs
-        formData.append('name', braceletName)
-        formData.append('description', description)
-        formData.append('era', era)
-        console.log(era)
+        let isFormValid = true;
 
-        console.log(formData)
-        axios.post('http://127.0.0.1:8000/api/bracelets/', formData)
-            .then(
-                    res => {
-                        setAllBracelets([...allBracelets, res.data])
-                        navigate("/dashboard");
-                    }
-                )
-            .catch(err => console.log(err))
+        //VALIDATION LOGIC
+        if(braceletName.length < 5){
+            setNameError("Name must be at least 5 characters!")
+            isFormValid = false;
+        } else {
+            setNameError('');
+        }
+        if(description.length < 5){
+            setDescriptionError("Description must be at least 5 characters!")
+            isFormValid = false;
+        } else {
+            setDescriptionError('');
+        }
+        if(!era){
+            setEraError("Era is required!")
+            isFormValid = false;
+        } else {
+            setEraError('');
+        }
+        if(!file){
+            setFileError("Image is required!")
+            isFormValid = false;
+        } else {
+            setFileError('');
+        }
+
+        if(isFormValid){
+            const formData = new FormData()
+            //file append
+            formData.append('file', file)
+            //Form Input - create form bracelet inputs
+            formData.append('name', braceletName)
+            formData.append('description', description)
+            formData.append('era', era)
+            console.log(era)
+    
+            console.log(formData)
+            axios.post('http://127.0.0.1:8000/api/bracelets/', formData)
+                .then(
+                        res => {
+                            setAllBracelets([...allBracelets, res.data])
+                            navigate("/dashboard");
+                        }
+                    )
+                .catch(err => console.log(err))
+        }
     }
     
     return (
@@ -57,18 +92,15 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
                                     </div>
                                 )} */}
                                 <h3>Create A Bracelet!</h3>
-                                <form
-                                className="requires-valication"
-                                encType="multipart/form-data"
-                                onSubmit={testHandler}>
+                                <form className="was-validation requires-validation" encType="multipart/form-data" onSubmit={testHandler} >
                                     {/* NAME INPUT */}
                                     <div className="col-md-12">
                                         <input type="text" name='' className="form-control" placeholder='Name'
                                         value={braceletName}
                                         onChange={event => setBraceletName(event.target.value)}
-                                        />
+                                        required />
                                         <div className="valid-feedback">Name is valid!</div>
-                                        <div className="invalid-feedback">Name cannot be blank!</div>
+                                        <div className="invalid-feedbacks">{nameError}</div>
                                     </div>
                                     {/* DESCRIPTION INPUT */}
                                     <div className="col-md-12">
@@ -78,7 +110,7 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
                                         onChange={event => setDescription(event.target.value)}
                                         ></textarea>
                                         <div className="valid-feedback">Description is valid!</div>
-                                        <div className="invalid-feedback">Description cannot be blank!</div>
+                                        <div className="invalid-feedbacks">{descriptionError}</div>
                                     </div>
                                     {/* ERA INPUT */}
                                     <div className="col-md-12">
@@ -96,10 +128,14 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
                                             <option>Debut</option>
                                             <option>Midnight</option>
                                         </select>
+                                            <div className="valid-feedback">Era is valid!</div>
+                                            <div className="invalid-feedbacks">{eraError}</div>
                                     </div>
                                     {/* FILE INPUT */}
                                     <div className="col-md-12">
                                         <input type="file" className="form-control file-control" onChange={handleImageChange} />
+                                            <div className="valid-feedback">File is valid!</div>
+                                            <div className="invalid-feedbacks">{fileError}</div>
                                     </div>
                                     <div className="form-content preview-container">
                                         {preview && (
