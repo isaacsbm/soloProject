@@ -3,56 +3,24 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const CreateBracelet = ({allBracelets, setAllBracelets}) => {
+    const [preview, setPreview] = useState();
     const [braceletName, setBraceletName] = useState("");
     const [description, setDescription] = useState("");
     const [era, setEra] = useState("Red");
     const [formData, setFormData] = useState()
     const navigate = useNavigate();
     const [file, setFile] = useState()
-    // const newBraceletHandler = (event) => {
-    //     event.preventDefault();
-    //     // const newBracelet = {
-    //     //     name: braceletName,
-    //     //     description: description,
-    //     //     era: era
-    //     //     // image: formData.append('image', event.target.image.files[0]) - gives error on forming data before actualization
-    //     // };
-    //     const data = new FormData()
-        
-    //     data.append('name', braceletName)
-    //     data.append('description', description)
-    //     data.append('era', era)
-    //     data.append('image', event.target.image.files[0])
-
-    //     setFormData(data)
-    //     axios.post("http://127.0.0.1:8000/api/bracelets/", formData)
-    //     .then(
-    //         res => {
-    //             setBraceletName([...allBracelets, res.data])
-    //             navigate("/dashboard");
-    //         }
-    //     )
-    //     .catch( err => {
-    //         if (err.response) {
-
-    //             // Request was made, server responded with status != 2xx
-                
-    //             console.log(err.response.data)
-    //             console.log(err.response.status)
-    //             console.log(err.response.headers)
-                
-    //     }
-    //     })
-    // }
     const handleImageChange = (event) => {
-        setFile(event.target.files[0])
-        // console.log(event.target.files)
-        // const fileType = file.type
-        // console.log(fileType)
-      }
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+            const imageUrl = URL.createObjectURL(selectedFile);
+            setPreview(imageUrl);
+        }
+    }
+
+
     const testHandler = (event) => {
         event.preventDefault()
         const formData = new FormData()
@@ -75,53 +43,82 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
                 )
             .catch(err => console.log(err))
     }
+    
     return (
         <div>
-            <h1 className='site-header'>Create A Bracelet!</h1>
-            
-            <form encType="multipart/form-data" onSubmit={testHandler}>
-                <div>
-                    <label htmlFor="name"> 
-                        Name: 
-                        <input type="text" id='name' value={braceletName}
-                        onChange={event => setBraceletName(event.target.value)}
-                        />
-                    </label>
+            <div className="form-body">
+                <div className="row">
+                    <div className="form-holder">
+                        <div className="form-content">
+                            <div className="form-items">
+                                {/* {preview && (
+                                    <div className="preview-container">
+                                        <img src={preview} alt="" className='preview-image' />
+                                    </div>
+                                )} */}
+                                <h3>Create A Bracelet!</h3>
+                                <form
+                                className="requires-valication"
+                                encType="multipart/form-data"
+                                onSubmit={testHandler}>
+                                    {/* NAME INPUT */}
+                                    <div className="col-md-12">
+                                        <input type="text" name='' className="form-control" placeholder='Name'
+                                        value={braceletName}
+                                        onChange={event => setBraceletName(event.target.value)}
+                                        />
+                                        <div className="valid-feedback">Name is valid!</div>
+                                        <div className="invalid-feedback">Name cannot be blank!</div>
+                                    </div>
+                                    {/* DESCRIPTION INPUT */}
+                                    <div className="col-md-12">
+                                        <textarea name="description" id="description" cols="30" rows="5"
+                                        className="form-control file-control" placeholder='Description'
+                                        value={description}
+                                        onChange={event => setDescription(event.target.value)}
+                                        ></textarea>
+                                        <div className="valid-feedback">Description is valid!</div>
+                                        <div className="invalid-feedback">Description cannot be blank!</div>
+                                    </div>
+                                    {/* ERA INPUT */}
+                                    <div className="col-md-12">
+                                        <select name="" id="" className="form-select mt-3"
+                                        value={era}
+                                        onChange={event => setEra(event.target.value)}>
+                                            <option selected disabled>Era</option>
+                                            <option>Red</option>
+                                            <option>1989</option>
+                                            <option>Reputation</option>
+                                            <option>Speak Now</option>
+                                            <option>Folklore</option>
+                                            <option>Lover</option>
+                                            <option>Evermore</option>
+                                            <option>Debut</option>
+                                            <option>Midnight</option>
+                                        </select>
+                                    </div>
+                                    {/* FILE INPUT */}
+                                    <div className="col-md-12">
+                                        <input type="file" className="form-control file-control" onChange={handleImageChange} />
+                                    </div>
+                                    <div className="form-content preview-container">
+                                        {preview && (
+                                            <img
+                                                src={preview}
+                                                alt=""
+                                                className="preview-image"
+                                            />
+                                        )}
+                                    </div>
+                                    <div className="form-button mt-3">
+                                        <button className="btn btn-primary">Submit!</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="description"> 
-                        Description: 
-                        <textarea name="description" id="description" value={description} cols="20" rows="10"
-                        onChange={event => setDescription(event.target.value)}
-                        ></textarea>
-                    </label>
-                </div> 
-                <div>
-                    <label htmlFor="era"> 
-                        Era: 
-                        <select value={era}
-                        onChange={event => setEra(event.target.value)}
-                        >
-                            <option>Red</option>
-                            <option>1989</option>
-                            <option>Reputation</option>
-                            <option>Speak Now</option>
-                            <option>Folklore</option>
-                            <option>Lover</option>
-                            <option>Evermore</option>
-                            <option>Debut</option>
-                            <option>Midnight</option>
-                        </select>
-                    </label>
-                </div>
-                <div>
-                    <label htmlFor="file">
-                        Upload your picture!
-                        <input type="file" id='file' name='file'  onChange={handleImageChange} />
-                    </label>
-                </div>
-                <button>Submit!</button>
-            </form>
+            </div>
         </div>
     )
 }
