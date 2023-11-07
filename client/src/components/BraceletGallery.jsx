@@ -8,7 +8,7 @@ const BraceletGallery = ({allBracelets}) => {
                 {allBracelets.map(bracelet => {
                 return (
                     <div key={bracelet._id} className="col-xl-3 col-lg-4 col-md-6 mb-4">
-                        <div className="bg-white rounded shadow-sm container-rounded">
+                        <div className="bg-white rounded shadow-sm container-rounded container-color">
                             <img className='img-fluid rounded card-img-top img-rounded' src={`http://localhost:8000/${bracelet.image}`} alt="Image not Found" />
                             <div className="p-4">
                                 <h5><a href="#" className='text-dark'>{bracelet.name}</a></h5>

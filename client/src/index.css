@@ -1,13 +1,21 @@
 #neubar {
-    background: #fae8d2;
-    box-shadow: 4px 6px 12px rgba(0,0,0,0.4)
+
+    box-shadow: 4px 2px 8px rgb(248, 244, 244)
   }
-  
+  /* .header {
+    /* color: #fff6f6; */
+    /* text-shadow: 4px 4px 8px black; */
+   */
+  .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: rgb(255 255 255);
+}
   .nav-item .active {
+    color: #fff6f6;
+    outline: solid 0.5px;
     border-radius: 6px;
-    background: linear-gradient(145deg, #ffe7ca, #f5d7b2);
-    box-shadow:  4px 4px 8px #ddc1a0,
-                 -4px -4px 8px #f7e5cc;
+    outline-color: rgb(248, 244, 244);
+    /* background: #CDA6F3 */
+    box-shadow:  2px 2px 4px rgb(248, 244, 244)
   }
   #neubar .dropdown-menu a:hover {
     color: #454545
@@ -26,4 +34,11 @@
   a.navbar-brand {
     color: #454545
   }
+  img {
+    width: 400px;
+    height: 300px;
+  }
 
+  /* .color-container{
+    background-color: #FFB4A2;
+  } */

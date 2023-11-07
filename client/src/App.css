@@ -9,7 +9,7 @@
 }
 html, body {
     height: 100%;
-    background-color: #152733;
+    background: linear-gradient(175deg, #FDFDFD, #B57BEE);
     /* overflow: hidden; */
 }
 
@@ -182,4 +182,8 @@ html, body {
 
 .invalid-feedbacks{
   color: #ff606e;
+}
+
+.p-4 {
+  background-color: #FDFDFD;
 }
