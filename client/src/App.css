@@ -11,6 +11,8 @@ html, body {
     height: 100%;
     background-color: #152733;
 
+    background: linear-gradient(175deg, #FDFDFD, #B57BEE);
+    /* overflow: hidden; */
 }
 
 .file-control {
@@ -185,4 +187,8 @@ html, body {
 }
 h3 {
   color: #ff606e;
+}
+
+.p-4 {
+  background-color: #FDFDFD;
 }
