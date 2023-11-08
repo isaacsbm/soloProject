@@ -4,7 +4,7 @@ const app = express();
 const port = 8000;
 const cors = require('cors');
 const path = require('path')
-app.use(cors());
+app.use(cors({origin: "http://localhost:5173", credentials:true}));
 //!Mutler Call for Images
 // app.use("/uploads", express.static(__dirname + "/uploads"))
 // app.use('/uploads', express.static(path.join(__dirname, '/uploads')))

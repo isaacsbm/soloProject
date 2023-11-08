@@ -9,5 +9,5 @@ module.exports = app => {
         upload.single('file'), BraceletController.createBracelet
         );
     app.delete('/api/bracelets/:id', BraceletController.deleteBracelet);
-    app.patch('/api/bracelets/:id', BraceletController.updateBracelet);
+    app.patch('/api/bracelets/:id', upload.single('image'), BraceletController.updateBracelet);
 }

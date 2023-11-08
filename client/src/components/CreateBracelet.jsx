@@ -16,6 +16,8 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
     const [descriptionError, setDescriptionError] = useState('');
     const [eraError, setEraError] = useState('')
     const [fileError, setFileError] = useState('')
+
+    
     const handleImageChange = (event) => {
         const selectedFile = event.target.files[0];
         if (selectedFile) {
@@ -66,9 +68,8 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
             formData.append('description', description)
             formData.append('era', era)
             console.log(era)
-    
             console.log(formData)
-            axios.post('http://127.0.0.1:8000/api/bracelets/', formData)
+            axios.post('http://127.0.0.1:8000/api/bracelets/', formData, {withCredentials:true})
                 .then(
                         res => {
                             setAllBracelets([...allBracelets, res.data])
@@ -78,7 +79,6 @@ const CreateBracelet = ({allBracelets, setAllBracelets}) => {
                 .catch(err => console.log(err))
         }
     }
-    
     return (
         <div>
             <div className="form-body">

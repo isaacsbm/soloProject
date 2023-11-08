@@ -7,6 +7,8 @@ import axios from 'axios'
 import CreateBracelet from './components/CreateBracelet';
 import DeleteBracelet from './components/DeleteBracelet';
 import UpdateBracelet from './components/UpdateBracelet';
+import UpdateBracelet2 from './components/UpdateBracelet2';
+import OneBracelet from './components/OneBracelet';
 
 function App() {
   const [allBracelets, setAllBracelets] = 
@@ -25,6 +27,8 @@ function App() {
         <Route path='/createbracelet' element={<CreateBracelet setAllBracelets={setAllBracelets} allBracelets={allBracelets} />} />
         <Route path='/bracelets/delete/:id' element={<DeleteBracelet setAllBracelets={setAllBracelets} allBracelets={allBracelets} />} />
         <Route path='/bracelets/update/:id' element={<UpdateBracelet setAllBracelets={setAllBracelets} allBracelets={allBracelets} />} />
+        {/* <Route path='/bracelets/update2/:id' element={<UpdateBracelet2 setAllBracelets={setAllBracelets} allBracelets={allBracelets} />} /> */}
+        <Route path='/bracelets/:id' element={<OneBracelet/>}/>
       </Routes>
     </>
     </BrowserRouter>

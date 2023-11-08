@@ -10,7 +10,7 @@
 html, body {
     height: 100%;
     background-color: #152733;
-    /* overflow: hidden; */
+
 }
 
 .file-control {
@@ -149,9 +149,9 @@ html, body {
  color: #2acc80;
 }
 
-/* New CSS rules for image size and form transition */
+
 .preview-container {
-  grid-column: 2; /* Position the image in the second column (right) */
+  grid-column: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,27 +159,30 @@ html, body {
 
 .preview-image {
   max-width: 100%;
-  max-height: 200px; /* Adjust the height as needed */
+  max-height: 200px;
 }
 
 .form-content {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Create a two-column layout */
-  gap: 20px; /* Add some spacing between the image and form */ /* Display the image and form side by side */
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px; 
 }
 
 .form-items {
-    flex: 1; /* Let the form take up remaining space */
-    margin-right: 20px; /* Add spacing between the image and form */
+    flex: 1; 
+    margin-right: 20px; 
 }
 
 .preview-container {
-    flex: 1; /* Allow the image to take up half the width */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .invalid-feedbacks{
+  color: #ff606e;
+}
+h3 {
   color: #ff606e;
 }
